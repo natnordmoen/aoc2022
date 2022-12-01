@@ -1,8 +1,6 @@
 #!/usr/bin/env python
 
-from functools import reduce
-
-def solve():
+def day1():
     f = open("day1_input", "r")
     calories = 0
     max_calories = 0
@@ -20,15 +18,9 @@ def solve():
     return max_calories, all_calories
 
 
+max_calories, all_calories = day1() 
+sum_top_three = 0
+[sum_top_three := sum_top_three + x for x in sorted(all_calories, reverse=True)[:3]]
 
-
-def day1():
-    return solve()
-
-
-results = day1() 
-total = 0
-[total := total + x for x in sorted(results[1], reverse=True)[:3]]
-
-print("Part 1: ", results[0])
-print("Part 2: ", total)
+print("Part 1: ", max_calories)
+print("Part 2: ", sum_top_three)
