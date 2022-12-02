@@ -1,77 +1,79 @@
 #!/usr/bin/env python
 
-a = rock = 1
-b = paper = 2
-c = scissors = 3
+rock = 1
+paper = 2
+scissors = 3
 lost = 0
 draw = 3
 won = 6
 
 
-def find_score_part2(opponent, you):
-    x = 0
-    y = 3
-    z = 6
+def part2(opponent, you):
     if opponent == "A":
         if you == "X":
-            return x + scissors
+            return lost + scissors
         elif you == "Y":
-            return y + rock
+            return draw + rock
         else:
-            return z + paper
+            return won + paper
     elif opponent == "B":
         if you == "X":
-            return x + rock
+            return lost + rock
         elif you == "Y":
-            return y + paper
+            return draw + paper
         else:
-            return z + scissors
+            return won + scissors
     elif opponent == "C":
         if you == "X":
-            return x + paper
+            return lost + paper
         elif you == "Y":
-            return y + scissors
+            return draw + scissors
         else:
-            return z + rock
+            return won + rock
 
-def find_score_part1(opponent, you):
-    x = 1
-    y = 2
-    z = 3
+def part1(opponent, you):
     if opponent == "A":
         if you == "X":
-            return x + draw
+            return rock + draw
         elif you == "Y":
-            return y + won
+            return paper + won
         else:
-            return z + lost
+            return scissors + lost
     elif opponent == "B":
         if you == "X":
-            return x + lost
+            return rock + lost
         elif you == "Y":
-            return y + draw
+            return paper + draw
         else:
-            return z + won
+            return scissors + won
     elif opponent == "C":
         if you == "X":
-            return x + won
+            return rock + won
         elif you == "Y":
-            return y + lost
+            return paper + lost
         else:
-            return z + draw  
+            return scissors + draw  
+
+def find_score(isPart1, opponent, you):
+    if isPart1:
+        return part1(opponent, you)
+    else:
+        return part2(opponent, you)
 
 
 def solve():
-    total_score = 0
+    total_score_part1 = 0
+    total_score_part2 = 0
     with open("day2_input", "r") as f:
         for line in f:
-            total_score += find_score_part2(line.split()[0], line.split()[1])
+            total_score_part1 += find_score(True, line.split()[0], line.split()[1])
+            total_score_part2 += find_score(False, line.split()[0], line.split()[1])
 
-    return total_score, 0
+    return total_score_part1, total_score_part2
 
 def day2():
     results = solve()
     print("Part 1: ", results[0])
-    print("Part 2: ", 0)
+    print("Part 2: ", results[1])
 
 day2()
