@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-def solution2():
+def solve():
     f = open("day1_input", "r")
     calories = 0
     all_calories = []
