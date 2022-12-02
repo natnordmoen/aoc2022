@@ -13,7 +13,7 @@ def solve():
     return all_calories
 
 def day1():
-    all_calories = solution2()
+    all_calories = solve()
     sum_top_three = 0
     [sum_top_three := sum_top_three + x for x in sorted(all_calories, reverse=True)[:3]]
     print("Part 1: ", sorted(all_calories, reverse=True)[0])
