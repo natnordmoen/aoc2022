@@ -26,7 +26,7 @@ def make_crates(input, crates_number, lookup_dict):
 
     return crates
 
-def apply_instruction(crates, instruction):
+def apply_instruction_part1(crates, instruction):
     details = instruction.split(' ')
     how_many = int(details[1])
     from_crate = int(details[3])
@@ -34,6 +34,19 @@ def apply_instruction(crates, instruction):
 
     for c in range(1, how_many+1):
         crates[to_crate].insert(0, crates[from_crate][0])
+        crates[from_crate].pop(0)
+
+    return crates
+
+def apply_instruction_part2(crates, instruction):
+    details = instruction.split(' ')
+    how_many = int(details[1])
+    from_crate = int(details[3])
+    to_crate = int(details[5])
+
+    crates[to_crate] = crates[from_crate][0:how_many] + crates[to_crate]
+
+    for c in range(1, how_many+1):
         crates[from_crate].pop(0)
 
     return crates
@@ -57,16 +70,16 @@ def solve():
     crates = make_crates(lines[:empty_line_index-1], crates_number, lookup_dict) 
 
     instructions = lines[empty_line_index+1:]
+
     for instruction in instructions:
-        crates = apply_instruction(crates, instruction)
+        crates = apply_instruction_part1(crates, instruction)
+        #crates = apply_instruction_part2(crates, instruction) #uncomment this and comment previous for part2
 
     top_crates = find_top_crates(crates)
 
-    return top_crates, 0
+    return top_crates
 
 def day5():
-    results = solve()
-    print("Part 1: ", results[0])
-    print("Part 2: ", results[1])
+    print("result:", solve())
 
 day5()
